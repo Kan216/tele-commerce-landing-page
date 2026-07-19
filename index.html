@@ -62,21 +62,99 @@ src="https://www.facebook.com/tr?id=3382658948573524&ev=PageView&noscript=1"
 
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
 
-  /* NAV */
-  nav.wrap{
-    display:flex;align-items:center;justify-content:space-between;
-    padding-top:28px;padding-bottom:28px;
+  /* STICKY TOP NAV BAR */
+  .site-header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--paper);
+    border-bottom:1px solid var(--rule);
+    backdrop-filter:blur(8px);
+  }
+  nav.header-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:16px;
+    padding-bottom:16px;
+    gap:16px;
   }
   .wordmark{
     font-family:'Space Grotesk',sans-serif;
-    font-weight:700;font-size:18px;letter-spacing:0.02em;
-    display:flex;align-items:center;gap:8px;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:0.02em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:var(--ink);
+    flex-shrink:0;
   }
-  .wordmark .dot{width:8px;height:8px;background:var(--gold);border-radius:50%;display:inline-block;}
+  .wordmark img{
+    height:32px;
+    width:auto;
+    object-fit:contain;
+  }
+
+  /* NAV TABS */
+  .nav-tabs{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    overflow-x:auto;
+    white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding:4px 0;
+    scrollbar-width:none;
+  }
+  .nav-tabs::-webkit-scrollbar{display:none;}
+
+  .nav-tab{
+    font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink-soft);
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    transition:all 0.15s ease;
+    cursor:pointer;
+  }
+  .nav-tab:hover{
+    color:var(--ink);
+    background:rgba(210,203,180,0.3);
+  }
+  .nav-tab.active{
+    color:var(--blue-deep);
+    background:var(--white);
+    border-color:var(--rule);
+    box-shadow:0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  .nav-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--blue-deep);
+    color:var(--white);
+    text-decoration:none;
+    padding:8px 16px;
+    font-size:13.5px;
+    font-weight:600;
+    border-radius:var(--radius);
+    transition:background 0.15s ease, transform 0.15s ease;
+    flex-shrink:0;
+  }
+  .nav-cta:hover{
+    background:var(--blue);
+    transform:translateY(-1px);
+  }
 
   /* HERO */
   .hero{
-    padding:24px 0 72px;
+    padding:40px 0 72px;
   }
   .hero-grid{
     display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
@@ -206,8 +284,12 @@ src="https://www.facebook.com/tr?id=3382658948573524&ev=PageView&noscript=1"
   }
 
   /* SECTION SHARED */
-  section{padding:64px 0;}
-  .section-head{max-width:52ch;margin-bottom:40px;}
+  section{
+    padding:72px 0;
+    border-bottom:1px solid var(--rule);
+    scroll-margin-top:70px;
+  }
+  .section-head{max-width:56ch;margin-bottom:44px;}
   .section-label{
     font-family:'JetBrains Mono',monospace;
     font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;
@@ -215,7 +297,7 @@ src="https://www.facebook.com/tr?id=3382658948573524&ev=PageView&noscript=1"
   }
   h2{
     font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
-    font-size:clamp(24px,3vw,32px);
+    font-size:clamp(24px,3vw,34px);
     font-weight:700;margin:0;
     line-height:1.35;
   }
@@ -289,6 +371,7 @@ src="https://www.facebook.com/tr?id=3382658948573524&ev=PageView&noscript=1"
   .trust{
     text-align:center;
     padding:56px 0;
+    border-bottom:none;
   }
   .trust p{
     font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
@@ -297,6 +380,329 @@ src="https://www.facebook.com/tr?id=3382658948573524&ev=PageView&noscript=1"
     max-width:34ch;
     margin:0 auto 28px;
     color:var(--ink);
+  }
+
+  /* FEATURES SECTION */
+  .features-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:24px;
+    margin-bottom:40px;
+  }
+  .feature-card{
+    background:var(--white);
+    border:1px solid var(--rule);
+    padding:28px 24px;
+    position:relative;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .feature-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px -12px rgba(30,67,86,0.25);
+  }
+  .feature-icon{
+    font-size:24px;
+    margin-bottom:16px;
+    display:inline-block;
+  }
+  .feature-card h3{
+    font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
+    font-size:18px;
+    font-weight:700;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  .feature-card p{
+    margin:0;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+
+  .business-box{
+    background:var(--white);
+    border:1px dashed var(--rule);
+    padding:24px;
+    border-radius:var(--radius);
+  }
+  .business-box h4{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--blue-deep);
+    margin:0 0 14px;
+  }
+  .business-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .tag{
+    font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
+    font-size:13px;
+    font-weight:500;
+    background:var(--paper);
+    color:var(--ink);
+    padding:6px 14px;
+    border-radius:20px;
+    border:1px solid var(--rule);
+  }
+
+  /* PRICING SECTION */
+  .trial-banner{
+    background:rgba(201,138,46,0.12);
+    border:1px solid var(--gold);
+    padding:16px 20px;
+    border-radius:var(--radius);
+    margin-bottom:36px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .trial-banner .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    background:var(--gold);
+    color:var(--white);
+    padding:3px 8px;
+    border-radius:2px;
+    text-transform:uppercase;
+  }
+
+  .receipt-pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:32px;
+    align-items:stretch;
+  }
+
+  .receipt-card{
+    background:var(--white);
+    padding:32px 24px 40px;
+    position:relative;
+    border:1px solid var(--rule);
+    box-shadow:0 12px 30px -15px rgba(30,67,86,0.2);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .receipt-card::after{
+    content:"";
+    position:absolute;left:0;right:0;bottom:-9px;height:18px;
+    background:radial-gradient(circle at 9px 0, transparent 9px, var(--paper) 9.5px) repeat-x;
+    background-size:18px 18px;
+  }
+  .receipt-card.popular{
+    border-color:var(--sage);
+    box-shadow:0 18px 40px -15px rgba(76,122,94,0.3);
+  }
+
+  .receipt-stamp{
+    position:absolute;
+    top:20px;
+    right:-8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    padding:4px 8px;
+    border-radius:2px;
+    transform:rotate(-6deg);
+  }
+  .receipt-stamp.starter{
+    color:var(--blue-deep);
+    border:1.5px solid var(--blue-deep);
+    background:rgba(30,67,86,0.06);
+  }
+  .receipt-stamp.popular{
+    color:var(--sage);
+    border:1.5px solid var(--sage);
+    background:rgba(76,122,94,0.08);
+  }
+  .receipt-stamp.value{
+    color:var(--gold);
+    border:1.5px solid var(--gold);
+    background:rgba(201,138,46,0.08);
+  }
+
+  .plan-head{
+    border-bottom:1px dashed var(--rule);
+    padding-bottom:18px;
+    margin-bottom:20px;
+  }
+  .plan-tier{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .plan-title{
+    font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
+    font-size:20px;
+    font-weight:700;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  .plan-price{
+    font-family:'JetBrains Mono',monospace;
+    font-size:28px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .plan-price span{
+    font-size:13px;
+    color:var(--ink-soft);
+    font-weight:400;
+  }
+  .plan-save{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--sage);
+    background:rgba(76,122,94,0.1);
+    padding:2px 6px;
+    border-radius:2px;
+    margin-left:6px;
+    font-weight:600;
+  }
+
+  .plan-features{
+    list-style:none;
+    padding:0;
+    margin:0 0 28px;
+  }
+  .plan-features li{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink);
+    padding:7px 0;
+    border-bottom:1px dashed var(--rule);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .plan-features li:last-child{border-bottom:none;}
+  .plan-features li::before{
+    content:"✓";
+    color:var(--sage);
+    font-weight:700;
+  }
+
+  .receipt-card .cta-btn{
+    width:100%;
+    justify-content:center;
+  }
+
+  /* FAQ & CONTACT SECTION */
+  .faq-grid{
+    display:grid;
+    gap:16px;
+    margin-bottom:44px;
+  }
+  .faq-item{
+    background:var(--white);
+    border:1px solid var(--rule);
+    padding:20px 24px;
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .faq-item:hover{
+    background:var(--paper-alt);
+  }
+  .faq-question{
+    font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
+    font-size:16.5px;
+    font-weight:700;
+    margin:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  .faq-question::after{
+    content:"+";
+    font-family:'JetBrains Mono',monospace;
+    font-size:18px;
+    color:var(--gold);
+    transition:transform 0.2s ease;
+  }
+  .faq-item.open .faq-question::after{
+    transform:rotate(45deg);
+  }
+  .faq-answer{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin-top:12px;
+    display:none;
+    line-height:1.6;
+  }
+  .faq-item.open .faq-answer{
+    display:block;
+  }
+
+  .contact-banner{
+    background:var(--blue-deep);
+    color:var(--white);
+    padding:36px 30px;
+    border-radius:var(--radius);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+  .contact-banner h3{
+    font-family:'Space Grotesk','Noto Sans Myanmar',sans-serif;
+    font-size:22px;
+    font-weight:700;
+    margin:0 0 6px;
+  }
+  .contact-banner p{
+    margin:0;
+    font-size:14.5px;
+    color:rgba(251,250,246,0.8);
+  }
+  .contact-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .btn-gold{
+    background:var(--gold);
+    color:var(--ink);
+    border:none;
+    padding:12px 22px;
+    font-size:14.5px;
+    font-weight:600;
+    border-radius:var(--radius);
+    text-decoration:none;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .btn-gold:hover{
+    background:#D99636;
+    transform:translateY(-1px);
+  }
+  .btn-outline-white{
+    background:transparent;
+    color:var(--white);
+    border:1px solid rgba(251,250,246,0.4);
+    padding:12px 20px;
+    font-size:14.5px;
+    font-weight:600;
+    border-radius:var(--radius);
+    text-decoration:none;
+    transition:background 0.15s ease;
+  }
+  .btn-outline-white:hover{
+    background:rgba(251,250,246,0.1);
   }
 
   footer{
@@ -315,135 +721,388 @@ src="https://www.facebook.com/tr?id=3382658948573524&ev=PageView&noscript=1"
     .hero-grid{grid-template-columns:1fr;gap:40px;}
     .receipt-stage{order:-1;}
     .compare-grid{grid-template-columns:1fr;}
+    nav.header-nav{flex-wrap:wrap;}
+    .nav-tabs{order:3;width:100%;justify-content:flex-start;}
+    .contact-banner{flex-direction:column;align-items:flex-start;}
   }
 </style>
 </head>
 <body>
 
-<nav class="wrap">
-  <div class="wordmark"><span class="dot"></span>Tele-Commerce</div>
-</nav>
+<!-- STICKY NAVIGATION BAR -->
+<header class="site-header">
+  <nav class="wrap header-nav">
+    <a href="#overview" class="wordmark"><img src="assets/logo.png" alt="Tele-Commerce Logo">Tele-Commerce</a>
+    <div class="nav-tabs">
+      <a href="#overview" class="nav-tab active" data-tab="overview">Overview</a>
+      <a href="#features" class="nav-tab" data-tab="features">Features</a>
+      <a href="#pricing" class="nav-tab" data-tab="pricing">Pricing</a>
+      <a href="#faq-contact" class="nav-tab" data-tab="faq-contact">FAQ & Contact</a>
+    </div>
+    <a href="https://www.tele-commerce.work.gd/" class="nav-cta cta-btn">Tele-Commerce ဖွင့်ပါ</a>
+  </nav>
+</header>
 
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Telegram Shop Tool</div>
-      <h1>Telegram Chat Bot နဲ့ ၂၄/၇ စျေးရောင်းပေးနေမယ့် <em>Tele-Commerce Chat Bot Service</em> ကို စမ်းသုံးကြည့်ပါ</h1>
-      <p class="sub">Customer တွေအတွက် — tap တစ်ချက်နဲ့ order တင်နိုင်ပါတယ်။ <strong>Seller တွေအတွက် — screenshot ရှာစရာ၊ order ရေးမှတ်စရာ မလိုတော့ပါ။</strong></p>
-      <a href="https://www.tele-commerce.work.gd/" class="cta-btn" id="ctaBtn">
+<!-- TAB 1: OVERVIEW -->
+<div id="overview">
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Telegram Shop Tool</div>
+        <h1>Telegram Chat Bot နဲ့ ၂၄/၇ စျေးရောင်းပေးနေမယ့် <em>Tele-Commerce Chat Bot Service</em> ကို စမ်းသုံးကြည့်ပါ</h1>
+        <p class="sub">Customer တွေအတွက် — tap တစ်ချက်နဲ့ order တင်နိုင်ပါတယ်။ <strong>Seller တွေအတွက် — screenshot ရှာစရာ၊ order ရေးမှတ်စရာ မလိုတော့ပါ။</strong></p>
+        <a href="https://www.tele-commerce.work.gd/" class="cta-btn" id="ctaBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 2.5 2.7 9.9c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.8-.5l2.6-2.5 5.4 4c1 .5 1.7.3 2-.8l3.6-16.7c.4-1.4-.3-2-1.7-1.3Z"/></svg>
+          Tele-Commerce ကိုဖွင့်ပါ
+        </a>
+        <div class="cta-micro">Setup — 5 minutes / Tech knowledge မလိုပါ</div>
+      </div>
+
+      <div class="receipt-stage">
+        <div class="receipt">
+          <div class="stamp">CONFIRMED</div>
+          <div class="receipt-head">
+            <b>SHOP ORDER</b>
+            #TC-0842
+          </div>
+          <div class="receipt-line"><span>Product</span><span>Cotton T-Shirt (L)</span></div>
+          <div class="receipt-line"><span>Qty</span><span>2</span></div>
+          <div class="receipt-line"><span>Buyer</span><span>@customer_mm</span></div>
+          <div class="receipt-line"><span>Status</span><span>Auto-confirmed</span></div>
+          <div class="receipt-total"><span>Total</span><span>28,000 K</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">How it works</div>
+        <h2>Setup — ၃ ဆင့်ပဲ ရှိပါတယ်</h2>
+        <p style="margin-top:14px;">
+          <a href="https://drive.google.com/file/d/1mLACAjHxuTWQZg4ngQ3yOTwhZdzfUfui/view?usp=sharing" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue-deep);text-decoration:underline;text-underline-offset:3px;">
+            Setup User Guide အပြည့်အစုံ ကြည့်ရန် →
+          </a>
+        </p>
+      </div>
+      <div class="ledger">
+        <div class="ledger-row">
+          <div class="ledger-num">01</div>
+          <div class="ledger-body">
+            <h3>Product ထည့်ပါ</h3>
+            <p>ဈေးနှုန်း၊ ပုံ၊ description နဲ့ product list တစ်ခု bot ထဲမှာ ချက်ချင်း ပြင်လို့ရပါတယ်။</p>
+          </div>
+        </div>
+        <div class="ledger-row">
+          <div class="ledger-num">02</div>
+          <div class="ledger-body">
+            <h3>Chat Bot ရယူပါ</h3>
+            <p>Link တစ်ခုတည်းကို Telegram group description၊ bio စတဲ့ နေရာတိုင်းမှာ ချိတ်ထားလို့ရပါတယ်။</p>
+          </div>
+        </div>
+        <div class="ledger-row">
+          <div class="ledger-num">03</div>
+          <div class="ledger-body">
+            <h3>Customer တို့ အော်တို order တင်</h3>
+            <p>Customer က link ကို tap ပြီး order တင်တာနဲ့ seller ဆီ clean order summary ချက်ချင်း ရောက်ပါတယ်။</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Before / After</div>
+        <h2>Chat ထဲ order စစ်နေရတာနဲ့ Order ကိုယ်တိုင် ရောက်လာတာ</h2>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card messy">
+          <span class="compare-label">Group Chat</span>
+          <div class="bubble">Bag ဈေးဘယ်လောက်လဲရှင်</div>
+          <div class="bubble r">10,000 ဖြစ်ပါတယ်ရှင်</div>
+          <div class="bubble">Screenshot ပို့ထားပါတယ်</div>
+          <div class="bubble r">မမြင်ရသေးဘူးနော်</div>
+          <div class="bubble">ဒါက ဘယ်သူ့ order လဲ...</div>
+        </div>
+        <div class="compare-card clean">
+          <span class="compare-label">Tele-Commerce</span>
+          <div class="clean-line"><span>#TC-0841</span><span>Bag — 10,000K</span></div>
+          <div class="clean-line"><span>#TC-0842</span><span>Shirt — 28,000K</span></div>
+          <div class="clean-line"><span>#TC-0843</span><span>Shoes — 45,000K</span></div>
+          <div class="clean-line"><span>Status</span><span>All confirmed</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="wrap">
+      <p>Setup — 5 မိနစ်ပဲ ကြာပါတယ်။ Tech တတ်ဖို့ လိုအပ်ချက် မရှိပါ။</p>
+      <a href="https://www.tele-commerce.work.gd/" class="cta-btn" id="ctaBtn2">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 2.5 2.7 9.9c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.8-.5l2.6-2.5 5.4 4c1 .5 1.7.3 2-.8l3.6-16.7c.4-1.4-.3-2-1.7-1.3Z"/></svg>
         Tele-Commerce ကိုဖွင့်ပါ
       </a>
-      <div class="cta-micro">Setup — 5 minutes / Tech knowledge မလိုပါ</div>
     </div>
+  </section>
+</div>
 
-    <div class="receipt-stage">
-      <div class="receipt">
-        <div class="stamp">CONFIRMED</div>
-        <div class="receipt-head">
-          <b>SHOP ORDER</b>
-          #TC-0842
-        </div>
-        <div class="receipt-line"><span>Product</span><span>Cotton T-Shirt (L)</span></div>
-        <div class="receipt-line"><span>Qty</span><span>2</span></div>
-        <div class="receipt-line"><span>Buyer</span><span>@customer_mm</span></div>
-        <div class="receipt-line"><span>Status</span><span>Auto-confirmed</span></div>
-        <div class="receipt-total"><span>Total</span><span>28,000 K</span></div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<section>
+<!-- TAB 2: FEATURES -->
+<section id="features">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-label">How it works</div>
-      <h2>Setup — ၃ ဆင့်ပဲ ရှိပါတယ်</h2>
-      <p style="margin-top:14px;">
-        <a href="https://drive.google.com/file/d/1mLACAjHxuTWQZg4ngQ3yOTwhZdzfUfui/view?usp=sharing" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--blue-deep);text-decoration:underline;text-underline-offset:3px;">
-          Setup User Guide အပြည့်အစုံ ကြည့်ရန် →
-        </a>
+      <div class="section-label">Capabilities</div>
+      <h2>Telegram Shop အတွက် လိုအပ်သမျှ အကုန်ပါဝင်ပါတယ်</h2>
+      <p style="margin-top:10px;color:var(--ink-soft);font-size:16px;">
+        Website ဖွင့်စရာမလိုဘဲ Telegram Bot + Dashboard တစ်ခုတည်းနဲ့ အရောင်းစနစ်တစ်ခုလုံးကို စနစ်တကျ စီမံလိုက်ပါ။
       </p>
     </div>
-    <div class="ledger">
-      <div class="ledger-row">
-        <div class="ledger-num">01</div>
-        <div class="ledger-body">
-          <h3>Product ထည့်ပါ</h3>
-          <p>ဈေးနှုန်း၊ ပုံ၊ description နဲ့ product list တစ်ခု bot ထဲမှာ ချက်ချင်း ပြင်လို့ရပါတယ်။</p>
-        </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">📦</span>
+        <h3>Product Catalog Management</h3>
+        <p>Product အသစ်များ ထည့်သွင်းခြင်း၊ ဓာတ်ပုံ တင်ခြင်း၊ ဈေးနှုန်း၊ Stock နှင့် Description များကို Dashboard မှ ချက်ချင်း အချိန်မရွေး ပြင်ဆင်နိုင်သည်။</p>
       </div>
-      <div class="ledger-row">
-        <div class="ledger-num">02</div>
-        <div class="ledger-body">
-          <h3>Chat Bot ရယူပါ</h3>
-          <p>Link တစ်ခုတည်းကို Telegram group description၊ bio စတဲ့ နေရာတိုင်းမှာ ချိတ်ထားလို့ရပါတယ်။</p>
-        </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🤖</span>
+        <h3>Telegram Shop Bot</h3>
+        <p>Customer များသည် Telegram Bot ထဲတွင် Product အသေးစိတ် ကြည့်ရှုနိုင်ပြီး Tap တစ်ချက်တည်းဖြင့် တိုက်ရိုက် Order တင်နိုင်သည်။</p>
       </div>
-      <div class="ledger-row">
-        <div class="ledger-num">03</div>
-        <div class="ledger-body">
-          <h3>Customer တို့ အော်တို order တင်</h3>
-          <p>Customer က link ကို tap ပြီး order တင်တာနဲ့ seller ဆီ clean order summary ချက်ချင်း ရောက်ပါတယ်။</p>
-        </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🛒</span>
+        <h3>Automatic Order Numbering</h3>
+        <p>Order သစ်များကို Dashboard တွင် ချက်ချင်းမြင်ရပြီး #TC-xxxx အလိုအလျောက် နံပါတ်စနစ်ဖြင့် Pending၊ Confirmed၊ Completed Status များ စီမံနိုင်သည်။</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">💳</span>
+        <h3>Payment Slip Verification</h3>
+        <p>Customer မှ ငွေလွှဲ KPay / Wave / Bank Receipt Screenshot တင်လိုက်သည်နှင့် Shop Owner က Dashboard တွင် အမှားအယွင်းမရှိ စစ်ဆေးအတည်ပြုနိုင်သည်။</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">👥</span>
+        <h3>Customer History & CRM</h3>
+        <p>Telegram User တစ်ဦးချင်းစီ၏ ဝယ်ယူမှု မှတ်တမ်းနှင့် အချက်အလက်များကို Dashboard တွင် တစ်နေရာတည်း စုစည်း သိမ်းဆည်းပေးထားသည်။</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <h3>Unified Shop Dashboard</h3>
+        <p>Product များ၊ Order များ၊ Customer များ နှင့် Sales Summary များကို တစ်နေရာတည်းမှ ကြည့်ရှုနိုင်ပြီး အချိန်ကုန် သက်သာစွာ လုပ်ငန်းလည်ပတ်နိုင်သည်။</p>
+      </div>
+    </div>
+
+    <div class="business-box">
+      <h4>Tele-Commerce ကို မည်သည့် လုပ်ငန်းများ အသုံးပြုနိုင်သနည်း?</h4>
+      <div class="business-tags">
+        <span class="tag">Fashion Store</span>
+        <span class="tag">Cosmetic Shop</span>
+        <span class="tag">Food & Beverage</span>
+        <span class="tag">Electronic Store</span>
+        <span class="tag">Mobile Accessories</span>
+        <span class="tag">Digital Products</span>
+        <span class="tag">Preorder Business</span>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- TAB 3: PRICING -->
+<section id="pricing">
   <div class="wrap">
     <div class="section-head">
-      <div class="section-label">Before / After</div>
-      <h2>Chat ထဲ order စစ်နေရတာနဲ့ Order ကိုယ်တိုင် ရောက်လာတာ</h2>
+      <div class="section-label">Simple Pricing</div>
+      <h2>သင့် Shop အရွယ်အစားနှင့် ကိုက်ညီသော Plan ကို ရွေးချယ်ပါ</h2>
     </div>
-    <div class="compare-grid">
-      <div class="compare-card messy">
-        <span class="compare-label">Group Chat</span>
-        <div class="bubble">Bag ဈေးဘယ်လောက်လဲရှင်</div>
-        <div class="bubble r">10,000 ဖြစ်ပါတယ်ရှင်</div>
-        <div class="bubble">Screenshot ပို့ထားပါတယ်</div>
-        <div class="bubble r">မမြင်ရသေးဘူးနော်</div>
-        <div class="bubble">ဒါက ဘယ်သူ့ order လဲ...</div>
+
+    <div class="trial-banner">
+      <span class="badge">14-Day Free Trial</span>
+      <span>🎉 ရက်ပေါင်း ၁၄ ရက် အခမဲ့ စမ်းသပ် အသုံးပြုနိုင်ပါသည်။ (No credit card required)</span>
+    </div>
+
+    <div class="receipt-pricing-grid">
+      <!-- Tier 1: 1 Month -->
+      <div class="receipt-card">
+        <div>
+          <div class="receipt-stamp starter">1 MONTH</div>
+          <div class="plan-head">
+            <div class="plan-tier">STARTER PLAN</div>
+            <div class="plan-title">1 Month License</div>
+            <div class="plan-price">30,000 <span>MMK / month</span></div>
+          </div>
+          <ul class="plan-features">
+            <li>1 Active Storefront Bot</li>
+            <li>Up to 100 Product Items</li>
+            <li>Bilingual Customer Service Chat</li>
+            <li>Supabase Backup & Sync</li>
+            <li>14-Day Free Trial Included</li>
+          </ul>
+        </div>
+        <a href="https://www.tele-commerce.work.gd/" class="cta-btn">Choose Starter</a>
       </div>
-      <div class="compare-card clean">
-        <span class="compare-label">Tele-Commerce</span>
-        <div class="clean-line"><span>#TC-0841</span><span>Bag — 10,000K</span></div>
-        <div class="clean-line"><span>#TC-0842</span><span>Shirt — 28,000K</span></div>
-        <div class="clean-line"><span>#TC-0843</span><span>Shoes — 45,000K</span></div>
-        <div class="clean-line"><span>Status</span><span>All confirmed</span></div>
+
+      <!-- Tier 2: 3 Months -->
+      <div class="receipt-card popular">
+        <div>
+          <div class="receipt-stamp popular">MOST POPULAR</div>
+          <div class="plan-head">
+            <div class="plan-tier">QUARTERLY SAVER</div>
+            <div class="plan-title">3 Months License</div>
+            <div class="plan-price">85,000 <span>MMK / 3mo</span><span class="plan-save">Save 6%</span></div>
+          </div>
+          <ul class="plan-features">
+            <li>1 Active Storefront Bot</li>
+            <li>Up to 100 Product Items</li>
+            <li>Bilingual Customer Service Chat</li>
+            <li>Supabase Backup & Sync</li>
+            <li>Priority Support Assistance</li>
+            <li>14-Day Free Trial Included</li>
+          </ul>
+        </div>
+        <a href="https://www.tele-commerce.work.gd/" class="cta-btn">Choose Quarterly</a>
+      </div>
+
+      <!-- Tier 3: 6 Months -->
+      <div class="receipt-card">
+        <div>
+          <div class="receipt-stamp value">SUPER VALUE</div>
+          <div class="plan-head">
+            <div class="plan-tier">SUPER VALUE PLAN</div>
+            <div class="plan-title">6 Months License</div>
+            <div class="plan-price">160,000 <span>MMK / 6mo</span><span class="plan-save">Save 11%</span></div>
+          </div>
+          <ul class="plan-features">
+            <li>1 Active Storefront Bot</li>
+            <li>Up to 100 Product Items</li>
+            <li>Bilingual Customer Service Chat</li>
+            <li>Supabase Backup & Sync</li>
+            <li>Priority Support Assistance</li>
+            <li>14-Day Free Trial Included</li>
+          </ul>
+        </div>
+        <a href="https://www.tele-commerce.work.gd/" class="cta-btn">Choose Half-Year</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="trust">
+<!-- TAB 4: FAQ & CONTACT -->
+<section id="faq-contact">
   <div class="wrap">
-    <p>Setup — 5 မိနစ်ပဲ ကြာပါတယ်။ Tech တတ်ဖို့ လိုအပ်ချက် မရှိပါ။</p>
-    <a href="https://www.tele-commerce.work.gd/" class="cta-btn" id="ctaBtn2">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 2.5 2.7 9.9c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.8-.5l2.6-2.5 5.4 4c1 .5 1.7.3 2-.8l3.6-16.7c.4-1.4-.3-2-1.7-1.3Z"/></svg>
-      Tele-Commerce ကိုဖွင့်ပါ
-    </a>
+    <div class="section-head">
+      <div class="section-label">Support & Contact</div>
+      <h2>မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများနှင့် ဆက်သွယ်ရန်</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3 class="faq-question">Tele-Commerce ဆိုတာ ဘာလဲ?</h3>
+        <div class="faq-answer">
+          Tele-Commerce က Telegram အတွင်းမှာပဲ သင့်ဆိုင်ရဲ့ Product တွေကို ပြသနိုင်၊ Order လက်ခံနိုင်၊ Customer တွေနဲ့ Chat လုပ်နိုင်တဲ့ Commerce Platform ဖြစ်ပါတယ်။ App ထပ်သုံးစရာမလိုဘဲ Telegram ကနေ အကုန်စီမံနိုင်ပါတယ်။
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Website မရှိလည်း အသုံးပြုလို့ရလား?</h3>
+        <div class="faq-answer">
+          ရပါတယ်။ Website မရှိလည်း Telegram Bot တစ်ခုနဲ့ Product Catalog၊ Order Management နဲ့ Customer Management ကို Tele-Commerce ကနေ တိုက်ရိုက်အသုံးပြုနိုင်ပါတယ်။
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Customer က Order ဘယ်လိုတင်ရမလဲ?</h3>
+        <div class="faq-answer">
+          Customer က Telegram Bot ထဲဝင်ပြီး Product ကြည့်နိုင်ပါတယ်။ Order တင်ပြီး ငွေလွှဲပြီး Receipt ကို Bot ထဲမှာပဲ ပို့လိုက်ရုံနဲ့ Shop Owner ဘက်က Dashboard မှာ Order ကို စစ်ဆေးပြီး အတည်ပြုနိုင်ပါတယ်။
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Product ဘယ်နှစ်ခုတင်လို့ရလဲ?</h3>
+        <div class="faq-answer">
+          Product အများဆုံး (100) ခုထိ ထည့်သွင်းနိုင်ပြီး Product ပုံတစ်ပုံစီအတွက် File Size Limit လည်း သတ်မှတ်ထားပါတယ်။
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-question">Tele-Commerce က ဘယ်လိုစီးပွားရေးမျိုးတွေအတွက် သင့်တော်လဲ?</h3>
+        <div class="faq-answer">
+          Online Shop၊ Fashion၊ Cosmetic၊ Food & Beverage၊ Electronics၊ Digital Products နဲ့ Telegram ကနေ Order လက်ခံချင်တဲ့ Business အများစုအတွက် သင့်တော်ပါတယ်။ Coding မသိလည်း အလွယ်တကူ စတင်အသုံးပြုနိုင်ပါတယ်။
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-banner">
+      <div>
+        <h3>ယခုပဲ သင့် Shop ကို Telegram တွင် စတင် ရောင်းချလိုက်ပါ</h3>
+        <p>5 မိနစ်အတွင်း အခမဲ့ Setup ပြုလုပ်ပြီး Telegram Bot မှတစ်ဆင့် စတင်ရောင်းချနိုင်ပါသည်။</p>
+      </div>
+      <div class="contact-actions">
+        <a href="https://www.tele-commerce.work.gd/" class="btn-gold cta-btn">Tele-Commerce Dashboard သို့ သွားမည် →</a>
+        <a href="https://drive.google.com/file/d/1mLACAjHxuTWQZg4ngQ3yOTwhZdzfUfui/view?usp=sharing" target="_blank" rel="noopener" class="btn-outline-white">Setup Guide ဖတ်ရှုမည် →</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>Myanmar / Thailand ရောက် Telegram Seller များအတွက်</p>
-    <p>Tele-Commerce</p>
+    <p style="display:flex;align-items:center;gap:8px;">
+      <img src="assets/logo.png" alt="Tele-Commerce Logo" style="height:22px;width:auto;">
+      Myanmar / Thailand ရောက် Telegram Seller များအတွက် — Tele-Commerce
+    </p>
+    <p>© Tele-Commerce</p>
   </div>
 </footer>
 
 <script>
   // Fire Pixel Lead event on CTA click, then let the link navigate normally.
-  // Requires the Pixel base code above to be uncommented + Pixel ID filled in.
-  document.querySelectorAll('#ctaBtn, #ctaBtn2').forEach(function(btn){
+  document.querySelectorAll('.cta-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       if (typeof fbq === 'function') {
         fbq('track', 'Lead');
       }
     });
   });
+
+  // Interactive Accordion for FAQ
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.addEventListener('click', function(){
+      this.classList.toggle('open');
+    });
+  });
+
+  // Scroll Sync for Sticky Nav Tabs
+  const sections = document.querySelectorAll('div[id="overview"], section[id]');
+  const navTabs = document.querySelectorAll('.nav-tab');
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navTabs.forEach(tab => {
+          if (tab.getAttribute('data-tab') === id) {
+            tab.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
 </script>
 
 </body>
